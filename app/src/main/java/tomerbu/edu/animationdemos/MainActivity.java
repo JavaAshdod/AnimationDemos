@@ -1,5 +1,8 @@
 package tomerbu.edu.animationdemos;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +37,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void animateDroid() {
+        Animation mySet = AnimationUtils.loadAnimation(this, R.anim.my_set);
+        mySet.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Intent intent = new Intent(MainActivity.this, NextActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        ivDroid.startAnimation(mySet);
+
+    }
+
+    private void slide() {
         Animation slide = AnimationUtils.loadAnimation(this, R.anim.slide_right);
         ivDroid.startAnimation(slide);
     }
@@ -80,4 +107,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
